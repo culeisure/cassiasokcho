@@ -112,19 +112,18 @@
     if (e.target === lb || e.target.classList.contains('lb-x')) lbClose();
   });
 
-  /* 기명/무기명 선택 */
-  var modeLine = document.getElementById('modeLine');
+  /* 기명/무기명 선택: 카드 클릭 시 패널 전환 */
   var modeCards = document.querySelectorAll('.card[data-mode]');
-  if (modeLine && modeCards.length) {
-    modeCards.forEach(function (c) {
-      c.addEventListener('click', function () {
-        modeCards.forEach(function (o) { o.classList.remove('active'); });
-        c.classList.add('active');
-        modeLine.innerHTML = c.dataset.line;
-        track('mode_select', { mode: c.dataset.mode });
-      });
+  modeCards.forEach(function (c) {
+    c.addEventListener('click', function () {
+      modeCards.forEach(function (o) { o.classList.remove('active'); });
+      c.classList.add('active');
+      document.querySelectorAll('.mode-panel').forEach(function (pn) { pn.classList.remove('on'); });
+      var target = document.getElementById('panel-' + c.dataset.mode);
+      if (target) target.classList.add('on');
+      track('mode_select', { mode: c.dataset.mode });
     });
-  }
+  });
 
   /* 하단 고정바: 히어로 지나면 표시 */
   var sticky = document.querySelector('.sticky-bar');

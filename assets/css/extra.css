@@ -183,3 +183,12 @@ section, [id] { scroll-margin-top: 16px; }
 /* 네이비 섹션 안 흰 카드 색 상속 방지 */
 .job-mock { color: var(--ink); }
 .job-mock .jm-title { color: var(--ink); }
+
+/* 기명/무기명 탭 패널 */
+.mode-panel { display: none; margin-top: 14px; }
+.mode-panel.on { display: block; animation: panelIn 0.35s ease; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.panel-h { font-size: 0.95rem; font-weight: 800; color: var(--navy); margin: 18px 0 10px; }
