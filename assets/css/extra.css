@@ -75,3 +75,47 @@
 
 /* 앵커 오프셋 */
 section, [id] { scroll-margin-top: 16px; }
+
+/* 717 → 35 퍼널 */
+.funnel { text-align: center; margin: 26px 0 6px; }
+.funnel .f-box {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; max-width: 340px; margin: 0 auto;
+}
+.funnel .f-box .fv { font-size: 1.9rem; font-weight: 800; color: var(--navy); line-height: 1.2; }
+.funnel .f-box .fl { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+.funnel .f-arrow { font-size: 1.3rem; color: var(--gold); padding: 8px 0; font-weight: 700; }
+.funnel .f-box.hl { border-color: var(--gold); background: #fdf9ec; }
+.funnel .f-box.hl .fv { color: var(--gold); }
+
+/* 분양가 (네이비 섹션) */
+.price-list { display: grid; gap: 12px; margin: 24px 0; }
+.price-item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius); padding: 20px 22px;
+}
+.price-item .pn small { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: var(--gold-bright); }
+.price-item .pn b { font-size: 1.1rem; font-weight: 800; color: var(--white); }
+.price-item .pv { font-size: 1.55rem; font-weight: 800; color: var(--gold-bright); letter-spacing: -0.01em; }
+.price-cond { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 4px; }
+.price-cond span {
+  font-size: 0.82rem; font-weight: 600; color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 999px; padding: 6px 13px;
+}
+
+/* 환매 하이라이트 칩 */
+.bb-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.bb-chips span {
+  font-size: 0.82rem; font-weight: 700; color: #8a6a10;
+  background: var(--gold-soft); border: 1px solid var(--gold); border-radius: 999px;
+  padding: 5px 12px;
+}
+
+/* 큰 강조 한 줄 */
+.big-line {
+  margin-top: 18px; text-align: center;
+  background: var(--navy); color: var(--gold-bright);
+  border-radius: 12px; padding: 14px;
+  font-size: 1.05rem; font-weight: 800;
+}
