@@ -72,6 +72,43 @@
     });
   });
 
+  /* 인트로 로고 */
+  var intro = document.querySelector('.intro');
+  if (intro) {
+    var hide = function () {
+      intro.classList.add('out');
+      setTimeout(function () { intro.remove(); }, 600);
+    };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      intro.remove();
+    } else {
+      setTimeout(hide, 1300);
+      intro.addEventListener('click', hide);
+    }
+  }
+
+  /* 사진 라이트박스 */
+  var lb = document.createElement('div');
+  lb.className = 'lightbox';
+  lb.innerHTML = '<span class="lb-x">&times;</span><img alt=""><div class="lb-cap"></div>';
+  document.body.appendChild(lb);
+  var lbImg = lb.querySelector('img');
+  var lbCap = lb.querySelector('.lb-cap');
+  document.querySelectorAll('.gallery-wide img, .gallery-grid img, .room-card img, .fullbleed img').forEach(function (img) {
+    img.classList.add('zoomable');
+    img.addEventListener('click', function () {
+      lbImg.src = img.currentSrc || img.src;
+      lbCap.textContent = img.alt || '';
+      lb.classList.add('on');
+      document.body.style.overflow = 'hidden';
+      track('photo_open', { photo: img.alt || '' });
+    });
+  });
+  lb.addEventListener('click', function () {
+    lb.classList.remove('on');
+    document.body.style.overflow = '';
+  });
+
   /* 하단 고정바: 히어로 지나면 표시 */
   var sticky = document.querySelector('.sticky-bar');
   var hero = document.querySelector('.hero');
