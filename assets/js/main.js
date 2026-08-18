@@ -90,19 +90,39 @@
   /* 사진 라이트박스 */
   var lb = document.createElement('div');
   lb.className = 'lightbox';
-  lb.innerHTML = '<div class="lb-card"><span class="lb-x">&times;</span><img alt=""><div class="lb-cap"></div></div>';
+  lb.innerHTML = '<div class="lb-card"><span class="lb-x">&times;</span><span class="lb-nav lb-prev">&#8249;</span><span class="lb-nav lb-next">&#8250;</span><img alt=""><div class="lb-cap"></div></div>';
   document.body.appendChild(lb);
   var lbImg = lb.querySelector('img');
   var lbCap = lb.querySelector('.lb-cap');
+  var gImgs = null, gIdx = 0, gAlt = '';
+
+  function lbShow() {
+    lbImg.src = gImgs[gIdx];
+    lbCap.textContent = gImgs.length > 1 ? gAlt + ' (' + (gIdx + 1) + '/' + gImgs.length + ')' : gAlt;
+    lb.classList.toggle('has-nav', gImgs.length > 1);
+  }
   document.querySelectorAll('.gallery-wide img, .gallery-grid img, .room-card img, .fullbleed img').forEach(function (img) {
     img.classList.add('zoomable');
     img.addEventListener('click', function () {
-      lbImg.src = img.currentSrc || img.src;
-      lbCap.textContent = img.alt || '';
+      try { gImgs = img.dataset.imgs ? JSON.parse(img.dataset.imgs) : null; } catch (err) { gImgs = null; }
+      if (!gImgs) gImgs = [img.currentSrc || img.src];
+      gIdx = 0;
+      gAlt = img.alt || '';
+      lbShow();
       lb.classList.add('on');
       document.body.style.overflow = 'hidden';
-      track('photo_open', { photo: img.alt || '' });
+      track('photo_open', { photo: gAlt });
     });
+  });
+  lb.querySelector('.lb-prev').addEventListener('click', function (e) {
+    e.stopPropagation();
+    gIdx = (gIdx - 1 + gImgs.length) % gImgs.length;
+    lbShow();
+  });
+  lb.querySelector('.lb-next').addEventListener('click', function (e) {
+    e.stopPropagation();
+    gIdx = (gIdx + 1) % gImgs.length;
+    lbShow();
   });
   var lbClose = function () {
     lb.classList.remove('on');
