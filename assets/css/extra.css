@@ -136,25 +136,38 @@ section, [id] { scroll-margin-top: 16px; }
   .intro { display: none; }
 }
 
-/* 사진 라이트박스 */
+/* 사진 모달 */
 .lightbox {
   position: fixed; inset: 0; z-index: 150;
-  background: rgba(8, 14, 24, 0.93);
+  background: rgba(8, 14, 24, 0.55);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0.25s ease;
-  padding: 20px; cursor: zoom-out;
+  padding: 22px;
 }
 .lightbox.on { opacity: 1; visibility: visible; }
-.lightbox img { max-width: 94vw; max-height: 80vh; border-radius: 10px; }
-.lightbox .lb-cap {
-  position: absolute; left: 0; right: 0; bottom: 26px;
-  text-align: center; color: rgba(255, 255, 255, 0.85); font-size: 0.9rem; font-weight: 600;
+.lb-card {
+  position: relative; background: var(--white); border-radius: 16px; overflow: hidden;
+  max-width: min(560px, 94vw); width: 100%;
+  box-shadow: 0 24px 70px rgba(8, 14, 24, 0.45);
+  transform: translateY(14px); transition: transform 0.25s ease;
 }
-.lightbox .lb-x {
-  position: absolute; top: 16px; right: 18px;
-  color: rgba(255, 255, 255, 0.8); font-size: 1.6rem; line-height: 1;
+.lightbox.on .lb-card { transform: none; }
+.lb-card img { display: block; width: 100%; max-height: 62vh; object-fit: cover; }
+.lb-card .lb-cap { padding: 14px 18px; font-size: 0.95rem; font-weight: 700; color: var(--ink); text-align: center; }
+.lb-card .lb-x {
+  position: absolute; top: 10px; right: 10px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(8, 14, 24, 0.55); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem; line-height: 1; cursor: pointer;
 }
-.zoomable { cursor: zoom-in; }
+.zoomable { cursor: pointer; }
+
+/* 기명/무기명 선택 카드 */
+.card[data-mode] { cursor: pointer; transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease; }
+.card[data-mode]:active { transform: scale(0.98); }
+.card[data-mode].active { border-color: var(--gold); box-shadow: 0 8px 22px rgba(217, 168, 33, 0.18); }
+#modeLine small { display: block; font-size: 0.76rem; font-weight: 500; color: rgba(243, 198, 63, 0.8); margin-top: 3px; }
 
 /* 부대시설 사진 타일 % 뱃지 */
 .gtile .pct {
@@ -166,3 +179,7 @@ section, [id] { scroll-margin-top: 16px; }
 
 /* 밝은 배경용 조건 칩 */
 .price-cond.light span { color: var(--ink); border-color: #cfc8b8; }
+
+/* 네이비 섹션 안 흰 카드 색 상속 방지 */
+.job-mock { color: var(--ink); }
+.job-mock .jm-title { color: var(--ink); }

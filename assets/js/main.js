@@ -90,7 +90,7 @@
   /* 사진 라이트박스 */
   var lb = document.createElement('div');
   lb.className = 'lightbox';
-  lb.innerHTML = '<span class="lb-x">&times;</span><img alt=""><div class="lb-cap"></div>';
+  lb.innerHTML = '<div class="lb-card"><span class="lb-x">&times;</span><img alt=""><div class="lb-cap"></div></div>';
   document.body.appendChild(lb);
   var lbImg = lb.querySelector('img');
   var lbCap = lb.querySelector('.lb-cap');
@@ -104,10 +104,27 @@
       track('photo_open', { photo: img.alt || '' });
     });
   });
-  lb.addEventListener('click', function () {
+  var lbClose = function () {
     lb.classList.remove('on');
     document.body.style.overflow = '';
+  };
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb || e.target.classList.contains('lb-x')) lbClose();
   });
+
+  /* 기명/무기명 선택 */
+  var modeLine = document.getElementById('modeLine');
+  var modeCards = document.querySelectorAll('.card[data-mode]');
+  if (modeLine && modeCards.length) {
+    modeCards.forEach(function (c) {
+      c.addEventListener('click', function () {
+        modeCards.forEach(function (o) { o.classList.remove('active'); });
+        c.classList.add('active');
+        modeLine.innerHTML = c.dataset.line;
+        track('mode_select', { mode: c.dataset.mode });
+      });
+    });
+  }
 
   /* 하단 고정바: 히어로 지나면 표시 */
   var sticky = document.querySelector('.sticky-bar');
