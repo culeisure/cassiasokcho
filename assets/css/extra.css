@@ -204,3 +204,38 @@ section, [id] { scroll-margin-top: 16px; }
 .lightbox.has-nav .lb-nav { display: flex; }
 .lb-prev { left: 10px; }
 .lb-next { right: 10px; }
+
+/* 자료받기 */
+.lead-btn { width: 100%; margin-top: 10px; background: rgba(255,255,255,0.1); color: var(--white); border: 1.5px solid rgba(255,255,255,0.4); }
+.lead-box {
+  margin-top: 14px; background: var(--white); border: 1.5px solid var(--gold);
+  border-radius: var(--radius); padding: 22px 20px;
+}
+.lead-box h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; }
+.lead-box .lead-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 14px; }
+.lead-box form { display: grid; gap: 12px; }
+.lead-box label { font-size: 0.85rem; font-weight: 700; color: var(--ink); display: block; }
+.lead-box input[type="text"], .lead-box input[type="tel"], .lead-box input[type="email"] {
+  width: 100%; margin-top: 5px; padding: 12px 13px;
+  border: 1px solid var(--line); border-radius: 10px;
+  font-size: 1rem; font-family: inherit; background: var(--cream); color: var(--ink);
+}
+.lead-box input:focus { outline: 2px solid var(--gold-bright); border-color: var(--gold); }
+.hp-field { position: absolute !important; left: -9999px !important; height: 1px; opacity: 0; }
+.lead-agree { font-weight: 500 !important; font-size: 0.83rem !important; color: var(--muted) !important; }
+.lead-agree a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+.lead-done-msg { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; text-align: center; }
+#leadDone .btn { width: 100%; }
+#leadSubmit { width: 100%; }
+
+/* 개인정보처리방침 토글 */
+.privacy { margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 14px; }
+.privacy summary {
+  list-style: none; cursor: pointer; font-size: 0.8rem; font-weight: 700;
+  color: rgba(255,255,255,0.65); display: inline-flex; align-items: center; gap: 6px;
+}
+.privacy summary::-webkit-details-marker { display: none; }
+.privacy summary::after { content: "+"; font-size: 0.9rem; }
+.privacy[open] summary::after { content: "\2212"; }
+.privacy-body { margin-top: 10px; font-size: 0.74rem; line-height: 1.7; color: rgba(255,255,255,0.55); }
+.privacy-body p + p { margin-top: 4px; }

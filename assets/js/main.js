@@ -145,6 +145,76 @@
     });
   });
 
+  /* 자료받기 폼 */
+  var leadCfg = window.LEAD_CFG || {};
+  var leadBtn = document.getElementById('leadBtn');
+  if (leadBtn && !leadCfg.endpoint) leadBtn.style.display = 'none';
+  if (leadBtn && leadCfg.endpoint) {
+    var leadBox = document.getElementById('leadBox');
+    var leadForm = document.getElementById('leadForm');
+    if (leadCfg.sitekey) {
+      var tw = document.getElementById('tsWidget');
+      tw.className = 'cf-turnstile';
+      tw.setAttribute('data-sitekey', leadCfg.sitekey);
+      var tsc = document.createElement('script');
+      tsc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+      tsc.async = true;
+      document.head.appendChild(tsc);
+    }
+    leadBtn.addEventListener('click', function () {
+      leadBox.hidden = false;
+      leadBtn.style.display = 'none';
+      leadBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      track('lead_open', {});
+    });
+    var privacyLink = document.getElementById('privacyLink');
+    if (privacyLink) {
+      privacyLink.addEventListener('click', function () {
+        var d = document.getElementById('privacyD');
+        if (d) d.open = true;
+      });
+    }
+    leadForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var btn = document.getElementById('leadSubmit');
+      var name = leadForm.lname.value.trim();
+      var phone = leadForm.lphone.value.replace(/[^0-9]/g, '');
+      var email = leadForm.lemail.value.trim();
+      if (!name) { alert('성함을 입력해 주세요.'); return; }
+      if (!/^01[016789][0-9]{7,8}$/.test(phone)) { alert('휴대폰 번호를 확인해 주세요.'); return; }
+      if (!leadForm.lagree.checked) { alert('개인정보 수집·이용에 동의해 주세요.'); return; }
+      var token = '';
+      if (leadCfg.sitekey && window.turnstile) token = window.turnstile.getResponse() || '';
+      btn.disabled = true;
+      btn.textContent = '전송 중...';
+      fetch(leadCfg.endpoint, {
+        method: 'POST',
+        body: JSON.stringify({
+          sp: body.dataset.spid || '',
+          name: name, phone: phone, email: email,
+          token: token,
+          hp: leadForm.company ? leadForm.company.value : ''
+        })
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        if (res.ok) {
+          leadForm.hidden = true;
+          var done = document.getElementById('leadDone');
+          done.hidden = false;
+          document.getElementById('leadPdf').href = atob(leadCfg.pdf);
+          track('lead_submit', {});
+        } else {
+          alert(res.msg || '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+          btn.disabled = false;
+          btn.textContent = '제출하고 자료 받기';
+        }
+      }).catch(function () {
+        alert('전송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+        btn.disabled = false;
+        btn.textContent = '제출하고 자료 받기';
+      });
+    });
+  }
+
   /* 하단 고정바: 히어로 지나면 표시 */
   var sticky = document.querySelector('.sticky-bar');
   var hero = document.querySelector('.hero');

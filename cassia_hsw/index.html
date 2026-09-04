@@ -14,8 +14,8 @@
 <meta property="og:image:height" content="630">
 <link rel="icon" type="image/png" href="../assets/img/logo_vertical_gold.png">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="../assets/css/style.css?v=mszkq9is">
-<link rel="stylesheet" href="../assets/css/extra.css?v=mszkq9is">
+<link rel="stylesheet" href="../assets/css/style.css?v=mtmcils5">
+<link rel="stylesheet" href="../assets/css/extra.css?v=mtmcils5">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WX3J72WZKD"></script>
 <script>
@@ -25,7 +25,14 @@
   gtag('config', 'G-WX3J72WZKD', { salesperson: '황상우' });
 </script>
 </head>
-<body data-sp="황상우" data-version="unified">
+<body data-sp="황상우" data-spid="hsw" data-version="unified">
+<script>
+  window.LEAD_CFG = {
+    endpoint: '',
+    sitekey: '',
+    pdf: 'Li4vYXNzZXRzL3BkZi9jYXNzaWFfc29rY2hvX3Byb3Bvc2FsX3c0cTkucGRm'
+  };
+</script>
 
 <div class="intro"><img src="../assets/img/logo_gold.png" alt="CASSIA SOKCHO"></div>
 
@@ -521,6 +528,25 @@
         <a class="btn btn-gold" href="tel:01051584156" data-cta="call" data-pos="contact">전화 상담</a>
         <a class="btn btn-dark" href="sms:01051584156" data-cta="sms" data-pos="contact">문자 상담</a>
       </div>
+      <button class="btn btn-line lead-btn" id="leadBtn" type="button">자료받기</button>
+    </div>
+
+    <div class="lead-box rv" id="leadBox" hidden>
+      <h3>제안서 자료 받기</h3>
+      <p class="lead-sub">아래 정보를 남겨주시면 제안서를 바로 내려받을 수 있습니다.</p>
+      <form id="leadForm" novalidate>
+        <label>성함<input type="text" name="lname" maxlength="20" autocomplete="name" required></label>
+        <label>연락처<input type="tel" name="lphone" maxlength="13" placeholder="010-0000-0000" autocomplete="tel" required></label>
+        <label>이메일<input type="email" name="lemail" maxlength="60" autocomplete="email"></label>
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true">
+        <div id="tsWidget"></div>
+        <label class="lead-agree"><input type="checkbox" name="lagree"> 개인정보 수집·이용에 동의합니다 <a href="#privacyD" id="privacyLink">개인정보처리방침 보기</a></label>
+        <button class="btn btn-gold" id="leadSubmit" type="submit">제출하고 자료 받기</button>
+      </form>
+      <div id="leadDone" hidden>
+        <p class="lead-done-msg">접수되었습니다. 담당자가 곧 연락드립니다.</p>
+        <a class="btn btn-navy" id="leadPdf" href="#" target="_blank" rel="noopener">제안서 다운로드</a>
+      </div>
     </div>
   </div>
 </section>
@@ -536,6 +562,19 @@
       <li>기명 회원의 추천 이용 시 객실 회원가만 적용되며 부대시설 회원 혜택은 적용되지 않습니다</li>
       <li>법인의 회계·세무 처리는 회사별 기준에 따라 달라질 수 있으므로 세무대리인 확인이 필요합니다</li>
     </ul>
+    <details class="privacy" id="privacyD">
+      <summary>개인정보처리방침</summary>
+      <div class="privacy-body">
+        <p>주식회사 씨유레저(이하 '회사')는 카시아 속초 오너스 멤버십 상담과 자료 제공을 위해 아래와 같이 개인정보를 수집·이용합니다.</p>
+        <p>1. 수집 항목: 성명, 연락처, 이메일</p>
+        <p>2. 수집·이용 목적: 상담 예약 및 진행, 멤버십 안내 자료 제공</p>
+        <p>3. 보유·이용 기간: 수집일로부터 1년 또는 동의 철회 시까지. 철회 요청 시 지체 없이 파기합니다</p>
+        <p>4. 제공: 상담 진행을 위해 담당 상담원에게 전달되며, 그 외 제3자에게 제공하지 않습니다</p>
+        <p>5. 동의 거부 권리: 동의를 거부할 수 있으며, 이 경우 자료 제공이 제한될 수 있습니다</p>
+        <p>6. 개인정보관리책임자: 채수용 (02-4449-8221)</p>
+        <p>주식회사 씨유레저 | 대표 채수용 | 사업자등록번호 220-87-89046 | 서울 강남구 봉은사로82길 9-5</p>
+      </div>
+    </details>
     <p class="copy">CASSIA SOKCHO Owners Membership</p>
   </div>
 </footer>
@@ -545,6 +584,6 @@
   <a class="sticky-sms" href="sms:01051584156" data-cta="sms" data-pos="sticky">문자 상담</a>
 </div>
 
-<script src="../assets/js/main.js?v=mszkq9is"></script>
+<script src="../assets/js/main.js?v=mtmcils5"></script>
 </body>
 </html>
